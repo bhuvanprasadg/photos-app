@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: photosapplication-deployment
+  labels:
+    app: photos
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: photos
+  template:
+    metadata:
+      labels:
+        app: photos
+    spec:
+      containers:
+      - name: photos-application
+        image: bhuvanprasad/photosapp:latest
+        ports:
+        - containerPort: 80
