@@ -3,12 +3,12 @@ node{
     def AWS_ACCOUNT_ID = "347476671573"
     def AWS_REGION = "us-east-1"
     def AWS_JENKINS_CREDENTIALS_ID = "aws-credentials"
-    def AWS_ECR_IMAGE = "uat-bki-api-test"
+    def AWS_ECR_IMAGE = "uat-bki-fe-test"
     def AWS_EKS_CLUSTER_NAME = "uat-bki-eks-cluster"
     def EKS_NAMESPACE = "uat-test"
     def EKS_DEPLOYMENT_FILE = "deployment.yaml"
-    def EKS_DEPLOYMENT_NAME = "railswelcomepage"
-    def RUNNING_CONTAINER_NAME = "railspagecontainer"
+    def EKS_DEPLOYMENT_NAME = "photosapplication-deployment"
+    def RUNNING_CONTAINER_NAME = ""
     def BUILD_NUMBER = currentBuild.number
     def IMAGE_VERSION = "v${BUILD_NUMBER}"
     
