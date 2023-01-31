@@ -8,7 +8,7 @@ node{
     def EKS_NAMESPACE = "uat-test"
     def EKS_DEPLOYMENT_FILE = "deployment.yaml"
     def EKS_DEPLOYMENT_NAME = "photosapplication-deployment"
-    def RUNNING_CONTAINER_NAME = ""
+    def RUNNING_CONTAINER_NAME = "photos-application"
     def BUILD_NUMBER = currentBuild.number
     def IMAGE_VERSION = "v${BUILD_NUMBER}"
     
