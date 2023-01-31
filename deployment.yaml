@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: photos-application
-        image: bhuvanprasad/photosapp:latest
+        image: 347476671573.dkr.ecr.us-east-1.amazonaws.com/uat-bki-fe-test:latest
         ports:
         - containerPort: 80
