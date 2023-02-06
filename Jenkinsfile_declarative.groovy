@@ -17,21 +17,35 @@ pipeline{
   stages{
     stage('Code checkout'){
       steps{
-        git branch: "${GITHUB_BRANCH}", url: "${GITHUB_PROJECT_URL}", credentialsId: "${GITHUB_CREDENTIALS}"
+        try{
+          git branch: "${GITHUB_BRANCH}", url: "${GITHUB_PROJECT_URL}", credentialsId: "${GITHUB_CREDENTIALS}"
+        }
+        catch(Exception e){
+          echo "FAILED ${e}"
+          currentBuild.result = 'FAILURE'
+          throw e
+        }
       }
     }
     
     stage('Docker Image Build & Push to ECR'){
       steps{
         script{
-          BUILD_NUMBER = currentBuild.number
-          IMAGE_VERSION = "v${BUILD_NUMBER}"
-          docker.withRegistry(
-              "https://${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com",
-              "ecr:${AWS_REGION}:${AWS_JENKINS_CREDENTIALS_ID}") {
-                def dockerImage = docker.build("${AWS_ECR_IMAGE}:${IMAGE_VERSION}")
-                dockerImage.push()
-              }
+          try{
+            BUILD_NUMBER = currentBuild.number
+            IMAGE_VERSION = "v${BUILD_NUMBER}"
+            docker.withRegistry(
+                "https://${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com",
+                "ecr:${AWS_REGION}:${AWS_JENKINS_CREDENTIALS_ID}") {
+                  def dockerImage = docker.build("${AWS_ECR_IMAGE}:${IMAGE_VERSION}")
+                  dockerImage.push()
+                }
+          }
+          catch(Exception e){
+            echo "FAILED ${e}"
+            currentBuild.result = 'FAILURE'
+            throw e
+          }
         }
       }
     }
