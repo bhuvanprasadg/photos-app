@@ -17,13 +17,15 @@ pipeline{
   stages{
     stage('Code checkout'){
       steps{
-        try{
-          git branch: "${GITHUB_BRANCH}", url: "${GITHUB_PROJECT_URL}", credentialsId: "${GITHUB_CREDENTIALS}"
-        }
-        catch(Exception e){
-          echo "FAILED ${e}"
-          currentBuild.result = 'FAILURE'
-          throw e
+        script{
+          try{
+            git branch: "${GITHUB_BRANCH}", url: "${GITHUB_PROJECT_URL}", credentialsId: "${GITHUB_CREDENTIALS}"
+          }
+          catch(Exception e){
+            echo "FAILED ${e}"
+            currentBuild.result = 'FAILURE'
+            throw e
+          }
         }
       }
     }
