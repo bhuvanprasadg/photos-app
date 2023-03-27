@@ -25,3 +25,25 @@ jobs:
         
       - name: Docker Push
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/photosapp:v${{github.run_id}}
+      
+      - name: Checkout GitOps Repository
+        uses: actions/checkout@v2
+        with:
+          repository: bhuvanprasadg/argocd-test
+          ref: main
+          token: ${{ secrets.PAT }}
+
+      - name: Update image version in manifest
+        run: |
+          cd dev/
+          sed -i "s/bhuvanprasad/photosapp:v4529322773/bhuvanprasad/photosapp:v${{github.run_id}}/g" deployment.yaml
+  
+      - name: Commit and push changes
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+          git add deployment.yaml
+          git commit -m "Update image version in deployment manifest"
+          git push
+
+
