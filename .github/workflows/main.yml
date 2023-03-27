@@ -36,8 +36,8 @@ jobs:
       - name: Update image version in manifest
         run: |
           cd dev/
-          my_variable=$(sed -n '/^photosapp.*/p' deployment.yaml)
-          sed -i "s/${{my_variable}}/photosapp:v${{github.run_id}}/g" deployment.yaml
+          sed -n '/^photosapp.*/p' deployment.yaml
+          sed -i "s/photosapp:v4530611544/photosapp:v${{github.run_id}}/g" deployment.yaml
   
       - name: Commit and push changes
         run: |
