@@ -37,7 +37,6 @@ jobs:
         run: |
           cd dev/
           my_variable=$(grep '^photosapp' deployment.yaml)
-          echo ${my_variable}
           sed -i "s/photosapp:v4530288290/photosapp:v${{github.run_id}}/g" deployment.yaml
   
       - name: Commit and push changes
