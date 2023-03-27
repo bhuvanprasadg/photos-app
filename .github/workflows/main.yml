@@ -36,7 +36,7 @@ jobs:
       - name: Update image version in manifest
         run: |
           cd dev/
-          sed -i "s/bhuvanprasad/photosapp:v4529322773/bhuvanprasad/photosapp:v${{github.run_id}}/g" deployment.yaml
+          sed -i "s/photosapp:v4529322773/photosapp:v${{github.run_id}}/g" deployment.yaml
   
       - name: Commit and push changes
         run: |
