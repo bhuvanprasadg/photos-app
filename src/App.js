@@ -5,7 +5,7 @@ function App() {
     return (
         <div className='App'>
             <h1>
-                <b>Welcome to Gallery Application by Bhuvan - test</b>
+                <b>Welcome to Gallery Application</b>
             </h1>
             <Photos />
         </div>
