@@ -5,7 +5,7 @@ function App() {
     return (
         <div className='App'>
             <h1>
-                <b>Welcome to Sample Gallery Application for testing</b>
+                <b>Welcome to Gallery</b>
             </h1>
             <Photos />
         </div>
