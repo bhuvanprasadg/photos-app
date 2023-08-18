@@ -12,6 +12,7 @@ const Photos = () => {
     let [data, setData] = useState([]);
     let [albumNo, setAlbumNo] = useState(1);
     let [isLoading, setIsLoading] = useState(false);
+    console.log("Testing the logs")
     useEffect(() => {
         setIsLoading(true);
         axios
